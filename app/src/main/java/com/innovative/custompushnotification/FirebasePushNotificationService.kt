@@ -30,9 +30,14 @@ class FirebasePushNotificationService : FirebaseMessagingService() {
             "ORIGINAL MESSAGE DATA PAYLOAD NOTIFICATION==>" + remoteMessage.data
         )
         wakeUpScreen()
-        takeAction(
+       /* takeAction(
             remoteMessage.notification?.title ?: "Notification",
             remoteMessage.notification?.body ?: "Message"
+        )*/
+
+        takeAction(
+            "Notification",
+            "Message"
         )
     }
 
@@ -41,18 +46,6 @@ class FirebasePushNotificationService : FirebaseMessagingService() {
             notification(title, msg)
         } else {
             notification(title, msg)
-        }
-    }
-
-    private fun playNotificationSound() {
-        try {
-            // val alarmSound = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-            val soundUri =
-                Uri.parse("android.resource://" + this.packageName + "/" + R.raw.notification_sound)
-            val r = RingtoneManager.getRingtone(this, soundUri)
-            r.play()
-        } catch (e: Exception) {
-            e.printStackTrace()
         }
     }
 
@@ -95,7 +88,7 @@ class FirebasePushNotificationService : FirebaseMessagingService() {
                 importance = NotificationManager.IMPORTANCE_HIGH
             }
             val soundUri =
-                Uri.parse("android.resource://" + this.packageName + "/" + R.raw.sprrow)
+                Uri.parse("android.resource://" + this.packageName + "/" + R.raw.fluate)
             val audioAttributes = AudioAttributes.Builder()
                 .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
                 .setUsage(AudioAttributes.USAGE_ALARM)
@@ -119,7 +112,7 @@ class FirebasePushNotificationService : FirebaseMessagingService() {
                 //.setSound(defaultSoundUri)
                 //.setSound(soundUri,audioAttributes)
                 //.setSound("android.resource://com.innovative.custompushnotification/"+R.raw.notification_sound)
-                .setSound(Uri.parse("android.resource://com.innovative.custompushnotification/" + R.raw.sprrow), AudioManager.STREAM_NOTIFICATION)
+                .setSound(Uri.parse("android.resource://com.innovative.custompushnotification/" + R.raw.fluate), AudioManager.STREAM_NOTIFICATION)
                 .setContentIntent(pendingIntent)
             val notificationManager = getSystemService(NOTIFICATION_SERVICE) as NotificationManager
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
